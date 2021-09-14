@@ -22,7 +22,7 @@ binary tree - inorder travsal tree, get result that array sorted in the ascendin
 answer is the k - 1th element of this array.
 
 ### 代码
-
+Iterate
 ```
 class Solution {
     public int kthSmallest(TreeNode root, int k) {
@@ -43,6 +43,41 @@ class Solution {
         }
         
         return res.get(k - 1);
+    }
+}
+```
+优化
+```
+class Solution {
+  public int kthSmallest(TreeNode root, int k) {
+    LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
+
+    while (true) {
+      while (root != null) {
+        stack.add(root);
+        root = root.left;
+      }
+      root = stack.removeLast();
+      if (--k == 0) return root.val;
+      root = root.right;
+    }
+  }
+}
+```
+Recursive
+```
+class Solution {
+    public int kthSmallest(TreeNode root, int k) {
+        List<Integer> res = new ArrayList<>();
+        helper(root, res);
+        return res.get(k - 1);
+    }
+    private void helper(TreeNode root, List<Integer> res) {
+        if(root != null) {
+            if(root.left != null) helper( root.left, res);
+            res.add(root.val);
+            if(root.right != null) helper( root.right, res);
+        }
     }
 }
 ```
