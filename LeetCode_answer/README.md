@@ -46,7 +46,7 @@ class Solution {
     }
 }
 ```
-优化
+优化iterate
 ```
 class Solution {
   public int kthSmallest(TreeNode root, int k) {
